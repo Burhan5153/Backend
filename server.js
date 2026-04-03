@@ -6,10 +6,14 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
+
+// 🔥 put this at the VERY TOP
 app.use(cors({
-  origin: true, // allows ALL origins dynamically
+  origin: true,
   credentials: true
 }));
+
+app.options('*', cors()); // ✅ handles preflight
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
