@@ -7,13 +7,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin || origin.includes('vercel.app')) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS not allowed"));
-    }
-  },
+  origin: true, // allows ALL origins dynamically
   credentials: true
 }));
 app.use(express.json());
