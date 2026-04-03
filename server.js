@@ -6,7 +6,12 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://beyond-earth-burhan5153s-projects.vercel.app', // your frontend URL
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization'],
+  credentials: true // if you are using auth tokens or cookies
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
