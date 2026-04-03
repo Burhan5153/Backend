@@ -7,10 +7,14 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'https://beyond-earth-burhan5153s-projects.vercel.app', // your frontend URL
-  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization'],
-  credentials: true // if you are using auth tokens or cookies
+  origin: function(origin, callback) {
+    if (!origin || origin.includes('vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed"));
+    }
+  },
+  credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
